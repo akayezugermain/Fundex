@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocketful | Student Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="brand">Pocketful</h1>
+        <p class="header-note">Base currency: <strong id="base-currency-label">RWF</strong></p>
+    </header>
+
+    <nav class="site-nav" aria-label="main">
+        <ul>
+             <li>
+                <a href="#dashboard">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#records">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"></path><circle cx="4" cy="6" r="1"></circle><circle cx="4" cy="12" r="1"></circle><circle cx="4" cy="18" r="1"></circle></svg>
+                    <span>Records</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#form">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v8M8 12h8"></path></svg>
+                    <span>Add</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#settings">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h12"></path><circle cx="16" cy="6" r="2"></circle><circle cx="8" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+            <li>
+                    <a href="#about">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.01"></path></svg>
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+
+<!-- ========== DASHBOARD ========== -->
+
+    <main id="main" tabindex="-1">
+        <section id="dashboard" aria-labelledby="dashboard-title">
+            <h2 id="dashboard-title">Dashboard</h2>
+            <p class="lead">Your Spending at glance.</p>
+
+            <dl class="stats">
+                <div class="stat">
+                    <dt>Records</dt>
+                    <dd id="stat-count">0</dd>
+                </div>
+                <div class="stat">
+                    <dt>Total Spent</dt>
+                    <dd id="stat-sum">0</dd>
+                </div>
+                <div class="stat">
+                    <dt>Top category</dt>
+                    <dd id="stat-top">None yet</dd>
+                </div>
+            </dl>
+
+            <div class="dash-grid">
+                <div class="card cap" id="cap-card" data-state="calm">
+                    <h3 id="cap-title">Monthly cap</h3>
+                    <p class="cap_numbers"><span id="cap-spent" class="mono">0</span> of <span id="cap-limit" class="mono">60,000</span> RWF</p>
+                    <progress class="meter" id="cap-meter" max="100" value="0" aria-labelledby="cap-title">0%</progress>
+                    <p id="cap-message-polite" class="cap-message" aria-live="polite"></p>
+                    <p id="cap-message-assertive" class="cap-message" aria-live="assertive"></p>
+                </div>
+
+                <div class="card">
+                    <h3>Last 7 days</h3>
+                    <ol class="class" id="trend" aria-label="Spending fro each the last 7 days">
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 1</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 2</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 3</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 4</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 5</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Day 6</span></li>
+                        <li><span class="bar-value">0</span><span class="bar-track"><span class="bar" style="--h: 0%"></span></span><span class="bar-day">Today</span></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">
+                    <h3>Latest records</h3>
+                    <a href="#records">See all records</a>
+                </div>
+                <ul class="latest" id="latest-list">
+                    <li class="empty">No records yet. Add your first expense.</li>
+                </ul>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- ========= Records ========= -->
+         <section id="records" aria-labelledby="record-title">
+            <h2 id="records-title">Records</h2>
+            <p class="lead">Find anything</p>
+
+            <div class="card toolbar" role="search" aria-label="Search and sort records">
+                <div class="field grow">
+                    <label for="search-input">Search</label>
+                    <input type="text" id="search-input" placeholder="Coffee" autocomplete="off" spellcheck="false" aria-labelledby="search-help search-status">
+                </div>
+                <div class="field">
+                    <label for="sort-select">Sort by</label>
+                    <select id="sort-select">
+                        <option value="date-desc">Date, newest first</option>
+                        <option value="date-asc">Date, oldest first</option>
+                        <option value="description-asc">Description A to Z</option>
+                        <option value="description-desc">Description Z to A</option>
+                        <option value="amount-desc">Amount, high to low</option>
+                        <option value="amount-desc">Amount, low to high</option>
+                    </select>
+                </div>
+                
+                <label class="check">
+                    <input type="checkbox" id="search-case" checked>
+                    <span>Ignore case</span>
+                </label>
+                <p id="search-help" class="hint">Try <code>coffee, bus</code></p>
+                <p id="search-status" class="status" role="status"></p>
+            </div>
+
+            <div class="table-wrap">
+                <table class="records-table">
+                    <caption class="sr-only">Your expenses</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col" class="num">Amount</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="records-body">
+                        <tr>
+                            <td data-label="Date" class="mono">09-10-2026</td>
+                            <td data-label="Description">Lunch at cafeteria</td>
+                            <td data-label="Category"><span class="chip">Food</span></td>
+                            <td data-label="Amount" class="num mono">2,500</td>
+                            <td data-label="Actions" class="actions">
+                                <button type="button" class="btn btn-small btn-outline" aria-label="Edit Lunch at cafeteria">Edit</button>
+                                <button type="button" class="btn btn-small btn-danger" aria-label="Delete Lunch at cafeteria">Delete</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Date" class="mono">09-10-2026</td>
+                            <td data-label="Description">Bus</td>
+                            <td data-label="Category"><span class="chip">Transport</span></td>
+                            <td data-label="Amount" class="num mono">9,000</td>
+                            <td data-label="Actions" class="actions">
+                                <button type="button" class="btn btn-small btn-outline" aria-label="Edit bus pass">Edit</button>
+                                <button type="button" class="btn btn-small btn-danger" aria-label="Delete bus pass">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </section>
+
+
+
+
+         <!-- ============ ADD/EDIT FORM ============ -->
+
+         <section id="form" aria-labelledby="form-title">
+            <h2 id="form-title">Add expense</h2>
+            <p class="lead">Every field is checked as you type.</p>
+
+            <form class="card form-grid" id="record-form" novalidate>
+                <input type="hidden" id="record-id">
+
+                <div class="field span-2">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" autocomplete="off" aria-describedby="description-hint description-error">
+                    <p id="description-hint" class="hint">No spaces at the start or end.</p>
+                    <p id="description-error" class="error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                    <label for="amount"> Amount <span class="currency-label">RWF</span></label>
+                    <input type="text" id="amount" inputmode="decimal" autocomplete="off" aria-describedby="amount-hint amount-error">
+                    <p id="amount-hint" class="hint">Numbers only up to 2 decimals.</p>
+                    <p id="amount-error" class="erro" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                    <label for="date">Date</label>
+                    <input type="text" id="date" inputmode="numeric" placeholder="DD-MM-YYYY" autocomplete="off" aria-describedby="date-hint date-error">
+                    <p id="date-hint" class="hint">Format: DD-MM-YYYY</p>
+                    <P id="date-error" class="error" aria-live="polite"></P>
+                </div>
+
+                <div class="field span-2">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" list="category-options" autocomplete="off" aria-describedby="category-hint category-error">
+                    <datalist id="category-options">
+                        <option value="Food"></option>
+                        <option value="Books"></option>
+                        <option value="Transport"></option>
+                        <option value="Entertainment"></option>
+                        <option value="Fees"></option>
+                        <option value="other"></option>
+                    </datalist>
+                    <p id="category-hint" class="hint">Letters, spaces and hyphens only.</p>
+                    <p id="category-error" class="error" aria-live="polite"></p>
+                </div>
+
+                <div class="form-actions span-2">
+                    <button type="submit" class="btn btn-primary" id="save-btn">Save expense</button>
+                    <button type="reset" class="btn btn-outline" id="cancel-btn">Cancel</button>
+                </div>
+                <p id="form-status" class="status span-2" role="status"></p>
+            </form>
+         </section>
+
+
+
+
+         <!-- ============ SETTINGS ============ -->
+
+         <section id="settings" aria-labelledby="settings-title">
+            <h2 id="settings-title">Settings</h2>
+            <p class="lead">Everything saves on this device as you change it.</p>
+
+            <div class="settings-grid">
+                <div class="card">
+                    <h3>Monthly cap</h3>
+                    <div class="field">
+                        <label for="cap-input">Most you want to spend <span class="curreny-label">RWF</span></label>
+                        <input type="text" id="cap-input" inputmode="decimal" value="60000" autocomplete="off" aria-describedby="cap-input-error">
+                        <p id="cap-input-error" class="error" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Currencies</h3>
+                    <div class="field">
+                        <label for="base-currency">Base currency</label>
+                        <select id="base-currency">
+                            <option value="RWF" selected>RWF</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </div>
+
+                    <fieldset class="rates">
+                        <legend>Exchange rates (you type them)</legend>
+                        <div class="rate-row">
+                            <label for="rate-usd">1 USD =</label>
+                            <input type="text" id="rate-usd" inputmode="decimal" placeholder="Your rate" autocomplete="off" aria-describedby="rate-usd-unit">
+                            <span id="rate-usd-unit">RWF</span>
+                        </div>
+
+                        <div class="rate-row">
+                            <label for="rate-eur">1 EUR =</label>
+                            <input type="text" id="rate-eur" inputmode="decimal" placeholder="Your rate" autocomplete="off" aria-describedby="rate-eur-unit">
+                            <span id="rate-eur-unit">RWF</span>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="card">
+                    <h3>Categories</h3>
+                    <ul class="chips" id="category-list">
+                        <li>Food<button type="button" class="chip-remove" aria-label="Remove Food">&times;</button></li>
+                        <li>Books<button type="button" class="chip-remove" aria-label="Remove Books">&times;</button></li>
+                        <li>Transport<button type="button" class="chip-remove" aria-label="Remove Transport">&times;</button></li>
+                        <li>Entertainment<button type="button" class="chip-remove" aria-label="Remove Entertainment">&times;</button></li>
+                        <li>Fees<button type="button" class="chip-remove" aria-label="Remove Fees">&times;</button></li>
+                        <li>Other<button type="button" class="chip-remove" aria-label="Remove other">&times;</button></li>
+                    </ul>
+
+                    <div class="add-category">
+                        <div class="field grow">
+                            <label for="new-category">New category</label>
+                            <input type="text" id="new-category" placeholder="Letters, spaces and hyphens" autocomplete="off" aria-describedby="new-category-error">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="add-category-btn">Add</button>
+                    </div>
+                    <p id="new-category-error" class="error" aria-live="polite"></p>
+                </div>
+
+                <div class="card">
+                    <h3>Your data</h3>
+                    <div class="button-row">
+                        <button type="button" class="btn btn-outline" id="export-btn">Export JSON</button>
+                        <button type="button" class="btn btn-danger-outline" id="reset-btn">Reset everything</button>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="import-file">Import JSON file</label>
+                        <input type="file" id="import-file" accept=".json,application/json">
+                    </div>
+                    <p id="data-status" class="status" role="status"></p>
+                    <label class="check">
+                        <input type="checkbox" id="theme-toggle" role="switch">
+                        <span>Dark mode</span>
+                    </label>
+                </div>
+
+            </div>
+         </section>
+
+
+
+
+         <!-- ============ ABOUT ============ -->
+
+         <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title">About</h2>
+            <div class="card">
+                <p>Pocketful is student based finance tracker, where students will be able to monitor and manage their daily spendings.</p>
+                <p>I will explain why I built this app and what  problem it solves</p>
+
+                <h3>Contact</h3>
+                <ul class="contact">
+                    <li>GitHub: <a href="https://github.com/akagermain">akagermain</a></li>
+                    <li>Email: <a href="mailto:">g.iradukund2@alustudent.com</a></li>
+                </ul>
+            </div>
+         </section>
+    </main>
+
+
+
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Iradukunda Akayezu Germain &middot; Student Finance Tracker</p>
+    </footer>
+
+    <script type="module" src="./scripts/main.js"></script>
+
+
+</body>
+</html>
